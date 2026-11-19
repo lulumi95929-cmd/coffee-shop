@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>山海咖啡選物 | Mountain & Sea Roastery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+TC:wght@400;600;700&family=Noto+Serif+TC:wght@700;900&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: #ffffff;
+      --ink: #1f2421;
+      --muted: #5d6660;
+      --accent: #2c5e4f;
+      --accent-soft: #e6efe9;
+      --border: #e2dfd7;
+      --radius: 14px;
+      --shadow: 0 8px 24px rgba(31, 36, 33, 0.06);
+      --font-display: "Cormorant Garamond", "Noto Serif TC", Georgia, serif;
+      --font-body: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 導覽列（3 個按鈕） */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(246, 244, 239, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.45rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      color: var(--ink);
+      background: rgba(44, 94, 79, 0.08);
+    }
+
+    .nav-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* 主內容區 */
+    main {
+      flex: 1;
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .hero-photo {
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 22px;
+      display: block;
+    }
+
+    .card-photo {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .guide-photo {
+      width: 100%;
+      max-width: 560px;
+      border-radius: 10px;
+      margin: 20px auto 0;
+      display: block;
+    }
+
+    .img-caption {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    /* 放大且具特色的標題字型 */
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2.35rem, 5.2vw, 3.35rem);
+      line-height: 1.18;
+      letter-spacing: 0.03em;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 24px;
+      font-size: 1.02rem;
+    }
+
+    .cta-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .cta-btn:hover {
+      opacity: 0.92;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h2, .card h3 {
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .price {
+      margin-top: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.05rem;
+    }
+
+    /* 表單樣式 */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: #fcfbf9;
+    }
+
+    input:focus, textarea:focus {
+      outline: 2px solid var(--accent);
+      border-color: transparent;
+    }
+
+    .status-msg {
+      margin-top: 12px;
+      font-size: 0.92rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-wrap">
+      <a class="brand" href="#home" onclick="switchPage('home'); return false;">山海咖啡選物</a>
+      <!-- 導覽列 3 個按鈕 -->
+      <nav aria-label="主導覽">
+        <button class="nav-btn active" data-page="home" onclick="switchPage('home')">首頁</button>
+        <button class="nav-btn" data-page="menu" onclick="switchPage('menu')">精選豆單</button>
+        <button class="nav-btn" data-page="contact" onclick="switchPage('contact')">聯絡我們</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 第 1 頁：首頁 -->
+    <section id="page-home" class="page active">
+      <div class="hero">
+        <img
+          class="hero-photo"
+          src="https://img.shoplineapp.com/media/image_clips/6923f98a7f4f08000ef84142/original.jpg?1763965322=&owner_id=5ca6dda99972ff000189e573"
+          alt="三杯不同烘焙程度的咖啡豆與前方白色咖啡杯中的拉花拿鐵"
+        />
+        <span class="tag">小批次精品烘焙</span>
+        <h1>在山嵐與海風之間，沖出一杯剛剛好的日常</h1>
+        <p class="subtitle">
+          我們每週精選高海拔與特色處理法生豆，以淺中焙保留花果與堅果香氣，讓你在家也能輕鬆沖出乾淨平衡的風味。
+        </p>
+        <button class="cta-btn" onclick="switchPage('menu')">查看本季豆單 →</button>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>每週新鮮烘焙</h2>
+          <p>接單後安排小批次烘焙，確保送到你手上的每一包豆子都保有完整香氣與餘韻。</p>
+        </div>
+        <div class="card">
+          <h2>清楚風味標示</h2>
+          <p>標註烘焙度、處理法與沖煮建議比例，不論手沖或義式都能快速找到合適的豆款。</p>
+        </div>
+        <div class="card">
+          <h2>歡迎客製洽詢</h2>
+          <p>提供辦公室咖啡豆訂閱與活動餐飲合作，可隨時透過聯絡頁與我們討論需求。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第 2 頁：精選豆單 -->
+    <section id="page-menu" class="page">
+      <div class="hero">
+        <span class="tag">本季精選</span>
+        <h1>精選咖啡豆單</h1>
+        <p class="subtitle">所有豆款皆可選擇原豆或依你的器具代客研磨（手沖 / 摩卡壺 / 義式）。</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <img
+            class="card-photo"
+            src="https://www.foodnext.net/dispPageBox/getFile/GetImg.aspx?FileLocation=%2FPJ-FOODNEXT%2FFiles%2F&FileName=photo-61435-i.jpg"
+            alt="玻璃壺將手沖咖啡注入白色咖啡杯，旁有咖啡豆與綠葉"
+          />
+          <h3>阿里山日曬 藝伎</h3>
+          <p>淺焙｜水蜜桃、茉莉花香、蜂蜜尾韻，口感細緻明亮。</p>
+          <div class="price">NT$ 680 / 200g</div>
+        </div>
+        <div class="card">
+          <img
+            class="card-photo"
+            src="https://img.shoplineapp.com/media/image_clips/69c937d8cb6826d2c7768afb/original.jpg?1774794712=&owner_id=5ca6dda99972ff000189e573"
+            alt="桌上放著標示哥倫比亞的咖啡豆罐、拉花拿鐵咖啡杯、手沖壺與手搖磨豆機"
+          />
+          <h3>哥倫比亞 粉紅波旁</h3>
+          <p>淺中焙｜紅莓、柑橘、焦糖甜感，酸甜平衡度高。</p>
+          <div class="price">NT$ 520 / 227g</div>
+        </div>
+        <div class="card">
+          <img
+            class="card-photo"
+            src="https://cdn.babyseo.ai/images/foodshot.ai/coffee-photography/coffee-photography-barista-pouring-latte-art-hero.webp"
+            alt="咖啡師將奶泡倒入咖啡杯製作拉花拿鐵，旁有義式咖啡機與磨豆機"
+          />
+          <h3>山海日常 配方豆</h3>
+          <p>中深焙｜烤榛果、黑巧克力、奶油醇厚度，適合拿鐵與美式。</p>
+          <div class="price">NT$ 420 / 454g</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 24px;">
+        <h3>居家手沖參考流程</h3>
+        <p>從研磨、預熱濾紙、悶蒸到分段注水，照著圖示步驟沖煮即可帶出乾淨甜感。</p>
+        <img
+          class="guide-photo"
+          src="https://image-cdn-flare.qdm.cloud/q6a422fd78adc9/image/data/2024/08/15/abd7730ff2111870cbcff9579c734897.png"
+          alt="手沖咖啡 7 大步驟圖解，包含研磨咖啡豆、預熱濾紙、倒入咖啡粉、第一次注水、悶蒸、第二次注水與移除濾杯攪拌"
+        />
+        <p class="img-caption">手沖咖啡 7 大步驟指南</p>
+      </div>
+    </section>
+
+    <!-- 第 3 頁：聯絡我們 -->
+    <section id="page-contact" class="page">
+      <div class="hero">
+        <span class="tag">歡迎交流</span>
+        <h1>聯絡我們</h1>
+        <p class="subtitle">想詢問豆款風味、批發合作或沖煮建議嗎？填寫下方表單即可留下訊息。</p>
+
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">您的稱呼</label>
+            <input id="name" type="text" required placeholder="例如：林小姐" />
+          </div>
+          <div class="form-group">
+            <label for="email">電子信箱</label>
+            <input id="email" type="email" required placeholder="name@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="message">留言內容</label>
+            <textarea id="message" rows="4" required placeholder="想了解哪一款豆子，或有什麼合作想法？"></textarea>
+          </div>
+          <button type="submit" class="cta-btn">送出留言</button>
+          <div id="form-status" class="status-msg" role="status"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 山海咖啡選物 Mountain & Sea Roastery</footer>
+
+  <script>
+    function switchPage(pageId) {
+      document.querySelectorAll('.page').forEach((sec) => {
+        sec.classList.toggle('active', sec.id === `page-${pageId}`);
+      });
+
+      document.querySelectorAll('.nav-btn').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.page === pageId);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      document.getElementById('form-status').textContent =
+        `感謝 ${name} 的留言，我們已收到您的訊息（此為前端示範表單）。`;
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>
